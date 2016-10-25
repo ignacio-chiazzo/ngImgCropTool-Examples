@@ -1,77 +1,77 @@
 <!DOCTYPE html>
 <html >
-<head>
-  <meta charset="UTF-8">
-  <title>Ingacio Chiazzo. ngImgCropTool</title>
-  <link rel='stylesheet prefetch' href='https://cdn.rawgit.com/CrackerakiUA/ngImgCropExtended/master/compile/unminified/ng-img-crop.css'>
-  <link rel='stylesheet prefetch' href='https://bootswatch.com/superhero/bootstrap.css'>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <div class="container" ng-app="app" ng-controller="Ctrl">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ignacio Chiazzo | ngImgCropTool</title>
+    <link rel='stylesheet prefetch' href='https://cdn.rawgit.com/CrackerakiUA/ngImgCropExtended/master/compile/unminified/ng-img-crop.css'>
+    <link rel='stylesheet prefetch' href='https://bootswatch.com/superhero/bootstrap.css'>
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js'></script>
+    <script src='https://rawgit.com/CrackerakiUA/ngImgCropFullExtended/master/compile/unminified/ng-img-crop.js'></script>
+    <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+    <script src="js/index.js"></script>
+  </head>
+  <body>
+    <div class="container" ng-app="app" ng-controller="Ctrl">
+      <div class="jumbotron">
+        <h2 class="title">Image Crop directive for AngularJS | <span class="tool">ngImgCropTool</span></h2>
+        <p>Select from the list below to choose which size you would like to crop images for.</p>
+        <form>
+          <fieldset>
+            <legend>List size : </legend>
+            <div class="form-group">
+              <select class="form-control" name="campaignSelect" id="repeatSelect" ng-model="selectedOption"
+              ng-options="option.name for option in availableOptions">
+              </select>
+            </div>
+          </fieldset>
+        </form>
+        <div class="well">
+          <div class="alert alert-warning">
+            <h4>You have selected:</h4>
+            <p>{{selectedOption.name}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="jumbotron">
+        <h2>Select an image file:</h2>
+        <div class="row">
+          <div class="col-lg-5">
+            <h3>Upload</h3>
+            <p>Upload image from your computer</p>
+            <input class="btn btn-default btn-lg" type="file" id="fileInput"/>
+          </div>
+          <h3 class="col-lg-2">or</h3>
+          <div class="col-lg-5">
+            <h3>Copy/Paste</h3>
+            <p>Copy and paste the image url below</p>
+            <input type="text" class="form-control input-lg" placeholder="Image url" ng-model="imageSelected">
+            <p class="text-muted small">e.g https://unsplash.it/600/300</p>
+          </div>
+        </div>
+      </div>
     <div class="jumbotron">
-      <h2 class="title">Image Crop directive for AngularJS | <span class="tool">ngImgCropTool</span></h2>
-      <p>Select from the list below to choose which size you would like to crop images for.</p>
-    </br>
-    <form>
-      <fieldset>
-        <legend>List size : </legend>
-        <div class="form-group">
-          <select class="form-control" name="campaignSelect" id="repeatSelect" ng-model="selectedOption"
-          ng-options="option.name for option in availableOptions">
-          </select>
+      <div class="row">
+        <div class="col-lg-6">
+          <h3>Crop Area for {{selectedOption.name}}</h3>
+          <div class="cropArea">
+            <img-crop image="imageSelected" area-type="rectangle" aspect-ratio="1.7" result-image="croppedImage" result-image-size="{w: selectedOption.value.w, h: selectedOption.value.h}" area-min-size="{w:selectedOption.value.w, h: selectedOption.value.h}" init-max-area="true"></img-crop>
+          </div>
         </div>
-      </fieldset>
-    </form>
-    <div class="well">
-      <div class="alert alert-warning">
-        <h4>You have selected:</h4>
-        <p>{{selectedOption.name}}</p>
-      </div>
-    </div>
-  </div>
-  <div class="jumbotron">
-    <h2>Select an image file:</h2>
-    <div class="row">
-      <div class="col-lg-5">
-        <h3>Upload</h3>
-        <p>Upload image from your computer</p>
-        <input class="btn btn-default btn-lg" type="file" id="fileInput" /></div>
-        <div class="col-lg-2">
-          <h3>or</h3>
+        <div class="col-lg-offset-2 col-lg-4">
+          <h3>Preview Image:</h3>
+          <img ng-src="{{croppedImage}}" class="preview-image img-responsive" />
+
+          <a href="{{croppedImage}}" download="{{filename}}"> asdloasdjadsoisad {{croppedImage}}</a>
+
+          <div class="download-well well">
+            <p class="text-danger">*Dont forget to add ".jpg" to the end of your file name before downloading</p>
+            <input type="text" class="form-control" placeholder="File name" ng-model="filename">
+            <button class="btn btn-primary btn-lg btn-block" ng-click="download()">DOWNLOAD</button>
+          </div>
         </div>
-        <div class="col-lg-5">
-          <h3>Copy/Paste</h3>
-          <p>Copy and paste the image url below</p>
-          <input type="text" class="form-control input-lg" placeholder="Image url" ng-model="myImage">
-        </br>
-        <p class="text-muted small">e.g https://unsplash.it/600/300</p>
       </div>
     </div>
-  </div>
-  <div class="jumbotron">
-    <div class="row">
-      <div class="col-lg-6">
-        <h3>Crop Area for {{selectedOption.name}}</h3>
-      </br>
-      <div class="cropArea">
-        <img-crop image="myImage" area-type="rectangle" aspect-ratio="1.7" result-image="myCroppedImage" result-image-size="{w: selectedOption.value.w, h: selectedOption.value.h}" area-min-size="{w:selectedOption.value.w, h: selectedOption.value.h}" init-max-area="true"></img-crop>
-      </div>
-    </div>
-    <div class="col-lg-offset-2 col-lg-4">
-      <h3>Preview Image:</h3>
-    </br>
-    <img ng-src="{{myCroppedImage}}" class="preview-image img-responsive" />
-  </br>
-  <div class="download-well well">
-    <p class="text-danger">*Dont forget to add ".jpg" to the end of your file name before downloading</p>
-    <input type="text" class="form-control" placeholder="File name" ng-model="filename">
-    <button class="btn btn-primary btn-lg btn-block" ng-click="download()">DOWNLOAD</button>
-  </div>
-</div>
-  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js'></script>
-  <script src='https://rawgit.com/CrackerakiUA/ngImgCropFullExtended/master/compile/unminified/ng-img-crop.js'></script>
-  <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
-  <script src="js/index.js"></script>
-</body>
+  </body>
 </html>
