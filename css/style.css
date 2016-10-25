@@ -6,7 +6,7 @@
 }
 
 .preview-image {
-  margin: 0 auto;
+  margin: 25px auto;
   background: #E4E4E4;
   min-width: 200px;
   min-height: 150px;
@@ -24,14 +24,11 @@
 .jumbotron .small {
   font-size: 16px;
 }
+
 .jumbotron .text-muted{
   color: #7D8FA1;
 }
 
 .tool {
   font-size: 20px;
-}
-
-.s {
-  font-size: 39px;
 }
