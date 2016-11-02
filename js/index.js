@@ -10,7 +10,6 @@ angular.module('app', ['ngImgCrop'])
     {id: '4', name: 'Option D (40*20)', value:{w: 40, h: 20}},
     {id: '5', name: 'Option E (14*10)', value:{w: 15, h: 10}}
   ];
-
   $scope.selectedOption = $scope.availableOptions[1];
 
   var handleFileSelect = function(evt) {
@@ -18,7 +17,7 @@ angular.module('app', ['ngImgCrop'])
     var reader = new FileReader();
     reader.onload = function (evt) {
       $scope.$apply(function($scope){
-        $scope.imageSelected=evt.target.result;
+        $scope.imageSelected = evt.target.result;
       });
     };
     reader.readAsDataURL(file);
